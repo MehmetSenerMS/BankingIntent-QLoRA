@@ -139,7 +139,3 @@ The notebook, result exports, and plots must be copied from the completed Colab 
 ## Limitations
 
 This is a single-model, single-dataset experiment with one final training seed and 200 steps (less than one full pass over the prepared training set). Five Optuna trials do not establish globally optimal settings. The benchmark is English-only and does not test out-of-domain banking requests, security, drift, or real customer workflows. Exact duplicate filtering does not detect all leakage. The LLM judge has missing outputs and possible evaluator bias; the MC Dropout diagnostic covers only one validation example. No deployment or production-safety claims are made.
-
-## Citation
-
-Casanueva, I., Temčinas, T., Gerz, D., Henderson, M., & Vulić, I. (2020). *Efficient Intent Detection with Dual Sentence Encoders*. Proceedings of the 2nd Workshop on Natural Language Processing for Conversational AI.
