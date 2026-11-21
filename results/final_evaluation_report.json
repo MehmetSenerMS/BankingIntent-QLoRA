@@ -1,0 +1,434 @@
+{
+  "project": "BankingIntent-QLoRA",
+  "experiment_name": "BankingIntent_QLoRA",
+  "experiment_id": "70ff97e5b7cb",
+  "created_utc": "2026-11-21T18:43:19.383514+00:00",
+  "model": {
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "quantization": "4-bit NF4",
+    "compute_dtype": "bfloat16",
+    "method": "QLoRA",
+    "lora_target_modules": "all-linear"
+  },
+  "dataset": {
+    "name": "BANKING77",
+    "source": "https://www.kaggle.com/datasets/ahtashamulhaque/banking77-reproducibility-snapshot",
+    "classes": 77,
+    "train_examples": 8495,
+    "validation_examples": 1501,
+    "test_examples": 3080,
+    "files": {
+      "train": "/content/drive/MyDrive/QLoRA_Data/train.jsonl",
+      "validation": "/content/drive/MyDrive/QLoRA_Data/validation.jsonl",
+      "test": "/content/drive/MyDrive/QLoRA_Data/test.jsonl"
+    },
+    "sha256": {
+      "train": "15fb2f04b7c65f3e33d2970639d0b29bb659ad6273f3410e57bc4bd4926361da",
+      "validation": "1bf1811fd12e616b365242c7486d2fd82a26ac5af7740111d757530200617889",
+      "test": "9b3c3cb620100d6c717425fd5b677b4d63de8af509753c68e1887ab9e0630af6"
+    }
+  },
+  "training": {
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "best_parameters": {
+      "lora_r": 16,
+      "alpha_multiplier": 2,
+      "lora_dropout": 0.05,
+      "learning_rate": 0.00021783403357582184,
+      "weight_decay": 0.0,
+      "warmup_ratio": 0.05,
+      "scheduler": "cosine"
+    },
+    "best_optuna_trial": 3,
+    "train_loss": 0.3542416554689407,
+    "validation_loss": 0.27600228786468506,
+    "validation_perplexity": 1.3178508790883408,
+    "base_validation_loss": 1.1327509880065918,
+    "base_validation_perplexity": 3.104184338641647,
+    "training_seconds": 443.87,
+    "adapter_path": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/trained_adapter"
+  },
+  "hyperparameter_search": {
+    "method": "Optuna TPE",
+    "ran_optuna": true,
+    "target_trials": 5,
+    "selected_trial": 3,
+    "best_validation_loss": 0.24076031148433685,
+    "parameters": {
+      "lora_r": 16,
+      "alpha_multiplier": 2,
+      "lora_dropout": 0.05,
+      "learning_rate": 0.00021783403357582184,
+      "weight_decay": 0.0,
+      "warmup_ratio": 0.05,
+      "scheduler": "cosine"
+    }
+  },
+  "validation": {
+    "base_loss": 1.1327509880065918,
+    "base_perplexity": 3.104184338641647,
+    "fine_tuned_loss": 0.27600228786468506,
+    "fine_tuned_perplexity": 1.3178508790883408
+  },
+  "model_metrics": {
+    "base": {
+      "task_success": 0.3951,
+      "rouge_l_f1": 0.5948,
+      "bleu": 0.5199,
+      "eos_rate": 0.9994,
+      "average_latency_seconds": 0.2603
+    },
+    "fine_tuned": {
+      "task_success": 0.7318,
+      "rouge_l_f1": 0.814,
+      "bleu": 0.788,
+      "eos_rate": 1.0,
+      "average_latency_seconds": 0.4611
+    }
+  },
+  "classification": {
+    "base": {
+      "accuracy": 0.3951,
+      "macro_precision": 0.5323,
+      "macro_recall": 0.3951,
+      "macro_f1": 0.3692,
+      "weighted_f1": 0.3692,
+      "invalid_prediction_rate": 0.0578
+    },
+    "fine_tuned": {
+      "accuracy": 0.7318,
+      "macro_precision": 0.7609,
+      "macro_recall": 0.7318,
+      "macro_f1": 0.7262,
+      "weighted_f1": 0.7262,
+      "invalid_prediction_rate": 0.0045
+    }
+  },
+  "classification_improvement": {
+    "accuracy_difference": 0.3367,
+    "macro_f1_difference": 0.357,
+    "accuracy_percentage_points": 33.67
+  },
+  "error_analysis": {
+    "fixed_errors": 1167,
+    "introduced_errors": 130,
+    "net_correct_predictions_gained": 1037,
+    "top_improved_categories": [
+      {
+        "category": "verify_top_up",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.975,
+        "improvement": 0.975
+      },
+      {
+        "category": "card_about_to_expire",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.8611111111111112,
+        "improvement": 0.8611111111111112
+      },
+      {
+        "category": "wrong_amount_of_cash_received",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.8314606741573034,
+        "improvement": 0.8314606741573034
+      },
+      {
+        "category": "getting_spare_card",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.7792207792207793,
+        "improvement": 0.7792207792207793
+      },
+      {
+        "category": "visa_or_mastercard",
+        "base_f1": 0.13953488372093023,
+        "fine_tuned_f1": 0.9113924050632911,
+        "improvement": 0.7718575213423609
+      },
+      {
+        "category": "pin_blocked",
+        "base_f1": 0.04878048780487805,
+        "fine_tuned_f1": 0.8051948051948052,
+        "improvement": 0.7564143173899271
+      },
+      {
+        "category": "getting_virtual_card",
+        "base_f1": 0.04878048780487805,
+        "fine_tuned_f1": 0.7959183673469388,
+        "improvement": 0.7471378795420607
+      },
+      {
+        "category": "cash_withdrawal_charge",
+        "base_f1": 0.18181818181818182,
+        "fine_tuned_f1": 0.8444444444444444,
+        "improvement": 0.6626262626262627
+      },
+      {
+        "category": "fiat_currency_support",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.6578947368421053,
+        "improvement": 0.6578947368421053
+      },
+      {
+        "category": "why_verify_identity",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.6470588235294118,
+        "improvement": 0.6470588235294118
+      },
+      {
+        "category": "failed_transfer",
+        "base_f1": 0.0851063829787234,
+        "fine_tuned_f1": 0.7228915662650602,
+        "improvement": 0.6377851832863368
+      },
+      {
+        "category": "declined_cash_withdrawal",
+        "base_f1": 0.23853211009174313,
+        "fine_tuned_f1": 0.8705882352941177,
+        "improvement": 0.6320561252023745
+      },
+      {
+        "category": "extra_charge_on_statement",
+        "base_f1": 0.16666666666666666,
+        "fine_tuned_f1": 0.7605633802816901,
+        "improvement": 0.5938967136150235
+      },
+      {
+        "category": "request_refund",
+        "base_f1": 0.03636363636363636,
+        "fine_tuned_f1": 0.6170212765957447,
+        "improvement": 0.5806576402321083
+      },
+      {
+        "category": "order_physical_card",
+        "base_f1": 0.0,
+        "fine_tuned_f1": 0.5797101449275363,
+        "improvement": 0.5797101449275363
+      }
+    ],
+    "least_improved_categories": [
+      {
+        "category": "reverted_card_payment?",
+        "base_f1": 0.3880597014925373,
+        "fine_tuned_f1": 0.5517241379310345,
+        "improvement": 0.16366443643849715
+      },
+      {
+        "category": "lost_or_stolen_phone",
+        "base_f1": 0.6885245901639344,
+        "fine_tuned_f1": 0.8333333333333334,
+        "improvement": 0.14480874316939896
+      },
+      {
+        "category": "get_disposable_virtual_card",
+        "base_f1": 0.5636363636363636,
+        "fine_tuned_f1": 0.6956521739130435,
+        "improvement": 0.13201581027667986
+      },
+      {
+        "category": "lost_or_stolen_card",
+        "base_f1": 0.5806451612903226,
+        "fine_tuned_f1": 0.7073170731707317,
+        "improvement": 0.12667191188040905
+      },
+      {
+        "category": "declined_card_payment",
+        "base_f1": 0.5333333333333333,
+        "fine_tuned_f1": 0.6571428571428571,
+        "improvement": 0.12380952380952381
+      },
+      {
+        "category": "card_not_working",
+        "base_f1": 0.7191011235955056,
+        "fine_tuned_f1": 0.8275862068965517,
+        "improvement": 0.10848508330104611
+      },
+      {
+        "category": "transfer_into_account",
+        "base_f1": 0.5348837209302325,
+        "fine_tuned_f1": 0.6410256410256411,
+        "improvement": 0.10614192009540857
+      },
+      {
+        "category": "atm_support",
+        "base_f1": 0.673469387755102,
+        "fine_tuned_f1": 0.7692307692307693,
+        "improvement": 0.09576138147566726
+      },
+      {
+        "category": "verify_my_identity",
+        "base_f1": 0.44755244755244755,
+        "fine_tuned_f1": 0.5263157894736842,
+        "improvement": 0.07876334192123663
+      },
+      {
+        "category": "age_limit",
+        "base_f1": 0.7692307692307693,
+        "fine_tuned_f1": 0.8405797101449275,
+        "improvement": 0.07134894091415822
+      },
+      {
+        "category": "card_arrival",
+        "base_f1": 0.3870967741935484,
+        "fine_tuned_f1": 0.44776119402985076,
+        "improvement": 0.060664419836302386
+      },
+      {
+        "category": "terminate_account",
+        "base_f1": 0.9195402298850575,
+        "fine_tuned_f1": 0.9523809523809523,
+        "improvement": 0.03284072249589487
+      },
+      {
+        "category": "card_linking",
+        "base_f1": 0.7301587301587301,
+        "fine_tuned_f1": 0.7619047619047619,
+        "improvement": 0.031746031746031744
+      },
+      {
+        "category": "cancel_transfer",
+        "base_f1": 0.631578947368421,
+        "fine_tuned_f1": 0.6122448979591837,
+        "improvement": -0.01933404940923733
+      },
+      {
+        "category": "Refund_not_showing_up",
+        "base_f1": 0.6166666666666667,
+        "fine_tuned_f1": 0.5964912280701754,
+        "improvement": -0.02017543859649129
+      }
+    ]
+  },
+  "bert_score": null,
+  "paired_bootstrap": {
+    "n_test": 3080,
+    "repeats": 10000,
+    "confidence": 0.95,
+    "metrics": {
+      "task_success": {
+        "base": {
+          "mean": 0.3951,
+          "ci95": [
+            0.3776,
+            0.4123
+          ]
+        },
+        "fine_tuned": {
+          "mean": 0.7318,
+          "ci95": [
+            0.7166,
+            0.7474
+          ]
+        },
+        "paired_difference": {
+          "mean": 0.3367,
+          "ci95": [
+            0.3175,
+            0.3562
+          ],
+          "wins": 1167,
+          "losses": 130,
+          "ties": 1783
+        }
+      },
+      "rouge_l_f1": {
+        "base": {
+          "mean": 0.5948,
+          "ci95": [
+            0.5811,
+            0.6082
+          ]
+        },
+        "fine_tuned": {
+          "mean": 0.814,
+          "ci95": [
+            0.8023,
+            0.8256
+          ]
+        },
+        "paired_difference": {
+          "mean": 0.2192,
+          "ci95": [
+            0.205,
+            0.2336
+          ],
+          "wins": 1282,
+          "losses": 314,
+          "ties": 1484
+        }
+      }
+    }
+  },
+  "mc_dropout": {
+    "adapter_path": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/trained_adapter",
+    "passes": 30,
+    "active_dropout_layers": 196,
+    "validation_case_id": 0,
+    "reference": "balance_not_updated_after_bank_transfer",
+    "deterministic_reference_nll": 0.05532025918364525,
+    "mc_mean_reference_nll": 0.05830747373402119,
+    "mc_std_reference_nll": 0.0056791833149699945,
+    "predictive_entropy": 0.15013092756271362,
+    "expected_entropy": 0.14987809310356776,
+    "epistemic_mutual_information": 0.00025283445914586755
+  },
+  "llm_judge": {
+    "summary": {
+      "base": {
+        "correctness": 2.2692,
+        "instruction": 4.3846,
+        "completeness": 4.0769,
+        "format": 4.4231,
+        "overall": 3.7885
+      },
+      "fine_tuned": {
+        "correctness": 3.8077,
+        "instruction": 4.9615,
+        "completeness": 4.6538,
+        "format": 4.8462,
+        "overall": 4.5673
+      },
+      "pairwise": {
+        "fine_tuned_wins": 53,
+        "base_wins": 13,
+        "ties": 64
+      },
+      "evaluated_samples": 130,
+      "requested_samples": 154
+    },
+    "coverage": {
+      "requested_samples": 154,
+      "evaluated_samples": 130,
+      "failed_samples": 24,
+      "completion_rate": 0.8442
+    },
+    "model": "mistralai/Mistral-7B-Instruct-v0.3"
+  },
+  "paths": {
+    "adapter": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/trained_adapter",
+    "predictions": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/heldout_predictions.jsonl",
+    "metrics": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/heldout_metrics.jsonl",
+    "classification": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/classification_results.csv",
+    "per_class_f1": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/per_class_f1_comparison.csv",
+    "error_analysis": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/prediction_error_analysis.csv",
+    "bootstrap": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/paired_bootstrap.json",
+    "mc_dropout": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/mc_dropout.json",
+    "judge": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/judge_results.jsonl",
+    "judge_summary": "/content/drive/MyDrive/QLoRA_Experiments/BankingIntent_QLoRA/70ff97e5b7cb/judge_summary.json"
+  },
+  "limitations": [
+    "The experiment uses one model architecture and one dataset.",
+    "The final adapter was trained for only 200 optimizer steps.",
+    "Only one training seed was evaluated.",
+    "Five Optuna trials do not establish globally optimal hyperparameters.",
+    "The original test split was preserved and exact overlapping training prompts were removed.",
+    "Exact-string deduplication does not detect semantic duplicates.",
+    "Accuracy and macro-F1 are the primary classification metrics.",
+    "ROUGE-L and BLEU are secondary lexical similarity metrics.",
+    "MC Dropout was evaluated on one validation example and does not establish calibrated uncertainty.",
+    "The LLM judge evaluated a stratified subset rather than the complete test set.",
+    "The LLM judge produced invalid JSON for some examples.",
+    "Judge scores may be affected by evaluator bias and missing responses.",
+    "Bootstrap confidence intervals characterize sampling uncertainty under the resampling assumptions.",
+    "The experiment does not establish production readiness."
+  ]
+}
